@@ -119,10 +119,10 @@ public class AclInterfaceSimulation {
 							&& _packetModel.getDestinationIP().contains(_aclModel.getDestination())
 							&& _packetModel.getDestPort() == _aclModel.getProtocolPort()) {
 						if (_aclModel.isPermission()) {
-							permit(_packetModel.getSourceIP(), _packetModel.getDestinationIP());
+							permit(_packetModel.getSourceIP(), _packetModel.getDestinationIP()+" "+_packetModel.getSourcePort()+" "+_packetModel.getDestPort());
 							break;
 						} else {
-							deny(_packetModel.getSourceIP(), _packetModel.getDestinationIP());
+							deny(_packetModel.getSourceIP(), _packetModel.getDestinationIP()+" "+_packetModel.getSourcePort()+" "+_packetModel.getDestPort());
 
 							break;
 						}
@@ -132,11 +132,11 @@ public class AclInterfaceSimulation {
 							&& _packetModel.getDestPort() == _aclModel.getProtocolPort()) {
 						// Test for Subnet Mask 0.0.0.255
 						if (_aclModel.isPermission()) {
-							permit(_packetModel.getSourceIP(), _packetModel.getDestinationIP());
+							permit(_packetModel.getSourceIP(), _packetModel.getDestinationIP()+" "+_packetModel.getSourcePort()+" "+_packetModel.getDestPort());
 
 							break;
 						} else {
-							deny(_packetModel.getSourceIP(), _packetModel.getDestinationIP());
+							deny(_packetModel.getSourceIP(), _packetModel.getDestinationIP()+" "+_packetModel.getSourcePort()+" "+_packetModel.getDestPort());
 
 							break;
 						}
@@ -144,12 +144,12 @@ public class AclInterfaceSimulation {
 				} else {
 					if (_packetModel.getSourceIP().contains(_aclModel.getSource())) {
 						if (_aclModel.isPermission()) {
-							permit(_packetModel.getSourceIP(), _packetModel.getDestinationIP());
+							permit(_packetModel.getSourceIP(), _packetModel.getDestinationIP()+" "+_packetModel.getSourcePort()+" "+_packetModel.getDestPort());
 
 							break;
 
 						} else {
-							deny(_packetModel.getSourceIP(), _packetModel.getDestinationIP());
+							deny(_packetModel.getSourceIP(), _packetModel.getDestinationIP()+" "+_packetModel.getSourcePort()+" "+_packetModel.getDestPort());
 
 							break;
 
@@ -158,12 +158,12 @@ public class AclInterfaceSimulation {
 							&& _packetSplitSource[1].contains(_aclSplitSource[1])
 							&& _packetSplitSource[2].contains(_aclSplitSource[2])) {
 						if (_aclModel.isPermission()) {
-							permit(_packetModel.getSourceIP(), _packetModel.getDestinationIP());
+							permit(_packetModel.getSourceIP(), _packetModel.getDestinationIP()+" "+_packetModel.getSourcePort()+" "+_packetModel.getDestPort());
 
 							break;
 
 						} else {
-							deny(_packetModel.getSourceIP(), _packetModel.getDestinationIP());
+							deny(_packetModel.getSourceIP(), _packetModel.getDestinationIP()+" "+_packetModel.getSourcePort()+" "+_packetModel.getDestPort());
 
 							break;
 						}
@@ -177,7 +177,7 @@ public class AclInterfaceSimulation {
 	public AclModel generateAclModelForExtended(AclModel _model, String[] _split) {
 
 		// Check whether or not to permit or deny all other packets
-		if (_split[3].contains("any") && _split[4].contains("any")) {
+		if (_split[4].contains("any") && _split[5].contains("any")) {
 
 			if (_split[2].contains("permit")) {
 				otherPackets.setPermitAll(true);
